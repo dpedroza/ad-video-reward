@@ -20,18 +20,11 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     private static final String APP_ID = "ca-app-pub-2099197271677892~3745990360";
 
     private RewardedVideoAd ad;
-    private Button btnShowAd;
 
     @Override
-    public void onPause() {
-        super.onPause();
-        ad.pause(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ad.resume(this);
+    protected void onDestroy() {
+        super.onDestroy();
+        ad.destroy(this);
     }
 
     @Override
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         ad = MobileAds.getRewardedVideoAdInstance(this);
         ad.setRewardedVideoAdListener(this);
 
-        btnShowAd = (Button) findViewById(R.id.btn_show_ad);
+        Button btnShowAd = (Button) findViewById(R.id.btn_show_ad);
         btnShowAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +46,18 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ad.pause(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ad.resume(this);
     }
 
     public void loadAd() {
