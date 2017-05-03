@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         MobileAds.initialize(this, APP_ID);
 
