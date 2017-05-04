@@ -13,7 +13,11 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import butterknife.BindView;
+
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
+
+    @BindView(R.id.btn_show_ad) Button btnShowAd;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String AD_UNIT_ID = "ca-app-pub-2099197271677892/5222723569";
@@ -37,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         ad = MobileAds.getRewardedVideoAdInstance(this);
         ad.setRewardedVideoAdListener(this);
 
-        Button btnShowAd = (Button) findViewById(R.id.btn_show_ad);
+        loadAd();
+
         btnShowAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadAd();
                 showAd();
             }
         });
