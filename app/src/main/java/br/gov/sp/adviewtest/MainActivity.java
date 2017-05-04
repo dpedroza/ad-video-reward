@@ -3,8 +3,6 @@ package br.gov.sp.adviewtest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -13,11 +11,10 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
-import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
-
-    @BindView(R.id.btn_show_ad) Button btnShowAd;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String AD_UNIT_ID = "ca-app-pub-2099197271677892/5222723569";
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
         MobileAds.initialize(this, APP_ID);
 
         ad = MobileAds.getRewardedVideoAdInstance(this);
@@ -43,13 +41,11 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         loadAd();
 
-        btnShowAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAd();
-            }
-        });
+    }
 
+    @SuppressWarnings("unused")
+    @OnClick(R.id.btn_show_ad) public void showAdClicked() {
+        showAd();
     }
 
     @Override
